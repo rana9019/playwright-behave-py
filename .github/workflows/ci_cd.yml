@@ -1,0 +1,33 @@
+name: Playwright Behave Tests (Single Feature)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: self-hosted
+    env:
+      RUNNER_TOOL_CACHE: /Users/ranaabidi/.cache/tools
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Use system Python version
+        run: python3 --version  
+
+      - name: Install Python dependencies
+        run: |
+          python3 -m pip install --upgrade pip
+          pip3 install -r requirements.txt
+
+      - name: Install Playwright browsers
+        run: |
+          python3 -m playwright install --with-deps
+
+      - name: Run all Behave features in a single command
+        run: |
+          mkdir -p reports
+          behave features/ --no-capture --format json.pretty --outfile reports/report.json
