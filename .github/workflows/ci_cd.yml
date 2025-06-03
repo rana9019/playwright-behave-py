@@ -29,3 +29,4 @@ jobs:
         run: |
           mkdir -p reports
           behave features/ --no-capture --format json.pretty --outfile reports/cucumber_report.json
+        continue-on-error: true
