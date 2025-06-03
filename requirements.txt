@@ -1,0 +1,4 @@
+playwright
+behave
+python-dotenv
+openpyxl
