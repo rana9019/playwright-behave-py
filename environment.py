@@ -84,7 +84,13 @@ def after_scenario(context, scenario):
             print(f" Error saving session: {e}")
 
 def after_feature(context, feature):
-    pass
+    storage_path = "session.json"
+    if os.path.exists(storage_path):
+        try:
+            os.remove(storage_path)
+            print(f"{storage_path} removed after feature '{feature.name}'")
+        except Exception as e:
+            print(f"Failed to remove {storage_path} after feature '{feature.name}': {e}")
 
 def after_all(context):
     if hasattr(context, "browser") and context.browser:
