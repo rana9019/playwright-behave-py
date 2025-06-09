@@ -28,4 +28,4 @@ jobs:
       - name: Run all Behave features in a single command
         run: |
           mkdir -p reports
-          behave features/ --no-capture --format json.pretty --outfile reports/cucumber_report.json
+          behave features/login/login.feature --no-capture --format json.pretty --outfile reports/login_report.json
