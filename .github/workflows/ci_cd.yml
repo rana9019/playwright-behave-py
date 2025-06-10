@@ -32,7 +32,7 @@ jobs:
       - name:  Run Behave features
         run: |
           mkdir -p reports
-          behave features/login/login.feature --no-capture --format json.pretty --outfile reports/login_report.json
+          behave features/rapport/rapport.feature --no-capture --format json.pretty --outfile reports/login_report.json
 
       - name:  Update Excel test report
         run: |
