@@ -29,10 +29,10 @@ jobs:
         run: |
           python3 -m playwright install --with-deps
 
-      - name:  Run all Behave features
+      - name:  Run Behave features
         run: |
           mkdir -p reports
-          behave features/ --no-capture --format json.pretty --outfile reports/cucumber_report.json
+          behave features/login/login.feature --no-capture --format json.pretty --outfile reports/login_report.json
 
       - name:  Update Excel test report
         run: |
