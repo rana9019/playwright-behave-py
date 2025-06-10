@@ -5,7 +5,7 @@ on:
     branches: [main]
   pull_request:
   schedule:
-    - cron: '0 2 * * *'  
+    - cron: '0 2 * * *'  # Daily at 2 AM UTC
 
 jobs:
   test:
@@ -14,35 +14,35 @@ jobs:
       RUNNER_TOOL_CACHE: /Users/ranaabidi/.cache/tools
 
     steps:
-      - name:  Checkout repository
+      - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name:  Use system Python
+      - name: Use system Python
         run: python3 --version
 
-      - name:  Install dependencies
+      - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip
           pip3 install -r requirements.txt
 
-      - name:  Install Playwright browsers
+      - name: Install Playwright browsers
         run: |
           python3 -m playwright install --with-deps
 
-      - name:  Run Behave features
+      - name: Run only login.feature tests with Behave
         run: |
           mkdir -p reports
-          behave features/rapport/rapport.feature --no-capture --format json.pretty --outfile reports/login_report.json
+          behave features/login/login.feature --no-capture --format json.pretty --outfile reports/login_report.json
 
-      - name:  Update Excel test report
+      - name: Update Excel test report
         run: |
           python3 utils/excel_updater.py
 
-      - name:  Generate test dashboard
+      - name: Generate test dashboard
         run: |
           python3 utils/playwright_dashboard.py
 
-      - name:  Upload reports as artifact
+      - name: Upload reports as artifact
         uses: actions/upload-artifact@v4
         with:
           name: test-reports
