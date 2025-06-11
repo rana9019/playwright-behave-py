@@ -30,7 +30,7 @@ jobs:
       - name: Run only login.feature tests with Behave
         run: |
           mkdir -p reports
-          behave features/login/login.feature --no-capture --format json.pretty --outfile reports/cucumber_report.json
+          behave features/login/login.feature --format json --outfile reports/cucumber_report.json
       - name: Update Excel test report
         run: |
           python3 utils/excel_updater.py
